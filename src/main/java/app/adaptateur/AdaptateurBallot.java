@@ -1,6 +1,9 @@
 package app.adaptateur;
 
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Locale;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -65,9 +68,8 @@ public class AdaptateurBallot {
 	 * @return une Response
 	 */
 	@POST
-	@Path("/{ballot}")
-	public Response addMessage(@PathParam("ballot") Ballot ballot) {
-		
+	public Response addMessage(Ballot ballot) {
+		LOG.info(ballot);
 		manageBallot.add(ballot);
 		
 		return Response.ok("added ballot", MediaType.APPLICATION_JSON).build();

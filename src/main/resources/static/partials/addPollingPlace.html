@@ -1,13 +1,11 @@
 <container>
 
-<h1>Ajouter un bureau de votes</h1>
-<hr></hr>
-
-<form id="formPolling" method="post"> 
-<input id="department" type="text" size="60" value="Département" />
-<input id="city" type="text" size="60" value="Ville" />
-<input id="numberPolling" type="text" size="60" value="Numéro du bureau de vote" />
-<input type="button" id="validateForm" value="Valider" onClick="display">
-</form> 
-
+    <h1>Ajouter un bureau de votes</h1>
+    
+    <input id="department" type="text" size="60" value="DÃ©partement" />
+    <input id="city" type="text" size="60" value="Ville" />
+    <input id="numberPolling" type="text" size="60" value="NumÃ©ro du bureau de vote" />
+    <button ng-click="savePollingPlace()" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-save"></span>&nbsp;Enregistrer</button>
+    <br>
+    <a href="#"><button>Return</button></a>
 </container>

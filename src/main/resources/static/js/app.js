@@ -8,12 +8,16 @@ myApp.config(function ($routeProvider, $httpProvider) {
     // $httpProvider.responseInterceptors.push('IntercepteurHTTP');
 
     /** Accueil */
-    $routeProvider.when('/createBallot', {
+    $routeProvider.when('/', {
+        templateUrl: my + '/partials/choixVote.html',
+        controller: '',
+        pageKey: 'HOME'
+
+    }).when('/createBallot', {
         templateUrl: my + '/partials/addBallot.html',
         controller: 'addBallot',
         pageKey: 'HOME'
 
-    /** Sinon */
     }).when('/createPollingPlace', {
         templateUrl: my + '/partials/addPollingPlace.html',
         controller: 'addPollingPlace',

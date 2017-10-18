@@ -74,8 +74,7 @@ public class AdaptateurPollingPlace {
 	 * @return Une Response OK avec un message si
 	 */
 	@POST
-	@Path("/{pollingPlace}")
-	public Response addUser(@PathParam("pollingPlace") PollingPlace pollingPlace) {
+	public Response addUser(PollingPlace pollingPlace) {
 		managePollingPlace.add(pollingPlace);
 		
 		return Response.ok("PollingPlace added", MediaType.APPLICATION_JSON).build();

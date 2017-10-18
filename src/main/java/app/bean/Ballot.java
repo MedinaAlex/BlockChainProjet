@@ -1,7 +1,7 @@
 package app.bean;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 import java.util.Set;
 
 import org.springframework.data.annotation.Id;
@@ -84,4 +84,12 @@ public class Ballot implements Serializable{
 	public void setType(Type type) {
 		this.type = type;
 	}
+
+	@Override
+	public String toString() {
+		return "Ballot [id=" + id + ", type=" + type + ", candidates=" + candidates + ", infos=" + infos + ", date="
+				+ date + "]";
+	}
+	
+	
 }

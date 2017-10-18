@@ -6,9 +6,9 @@
 <form id="formElection" method="post"> 
 
 <fieldset>
-  <legend>Veuillez sélectionner le type d'élection :</legend>
+  <legend>Veuillez sÃ©lectionner le type d'Ã©lection :</legend>
   <div>
-    <input type="radio" id="national" value="Nationale" name="typeE">
+    <input type="radio" id="presidentielle" value="Presidentielle" name="typeE">
     <label for="national">Nationale</label>
   </div>
   <div>
@@ -18,10 +18,13 @@
 </fieldset>
 
 <br><br>
-<input id="candidate" type="text" size="60" value="Candidat" />
-<input id="informationCandidate" type="text" size="60" value="Informations sur le candidat" />
-<input type="button" name="validateForm" value="Valider" onClick="display">
-</form> 
+<p>Date: <input type="text" id="datepicker"></p>
+<input id="candidates" type="text" size="60" value="Candidats" />
+<input id="infos" type="text" size="60" value="Informations l'Ã©lection" />
+<button ng-click="saveBallot()" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-save"></span>&nbsp;Enregistrer</button>
+</form>
+<br>
+<a href="#"><button>Return</button></a> 
 
 </container>
 
