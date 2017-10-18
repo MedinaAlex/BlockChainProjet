@@ -1,0 +1,86 @@
+body {
+	background: #E8E8E8 !important;
+	text-align: center;
+}
+
+.expe_true {
+	float: right;
+	width: 50%;
+	color: red;
+	font-size: 13px;
+	font-family: Comic Sans MS, Arial, sans-serif;
+	text-align: center;
+}
+
+.expe_false {
+	float: left;
+	width: 50%;
+	color: green;
+	font-size: 13px;
+	font-family: Comic Sans MS, Arial, sans-serif;
+	text-align: center;
+}
+
+.h1 {
+	color: RoyalBlue;
+	font-size: 15px;
+	font-family: Arial, sans-serif;
+	font-weight: bold;
+}
+
+.hr {
+	color: #6495ED;
+}
+
+.tprenom {
+	margin-left: auto;
+    margin-right: auto;
+	border-collapse: collapse;
+	border: 0, 5px solid black;
+	text-align: center;
+	margin-left: auto; 
+	margin-right: auto;
+}
+
+.tableDaMe {
+	margin-left: auto;
+    margin-right: auto;
+	border-collapse: collapse;
+	border: 0, 5px solid black;
+	width: 100%;
+	text-align: center;
+}
+
+.ths {
+	color: #6495ED;
+	font-size: 18px;
+	font-family: Arial, sans-serif;
+	font-weight: bold;
+	text-align: center;
+}
+
+.results {
+	color: RoyalBlue;
+	font-size: 13px;
+	font-family: Comic Sans MS, Arial, sans-serif;
+	text-align: center;
+	border: 1px solid black;
+}
+
+.resultsper {
+	color: RoyalBlue;
+	font-size: 13px;
+	font-family: Comic Sans MS, Arial, sans-serif;
+	text-align: center;
+	border: 1px solid black;
+}
+
+.resultsper:hover {
+	font-weight: bold;
+}
+
+footer {
+	position: absolute;
+	bottom: 0;
+	text-align: right;
+}

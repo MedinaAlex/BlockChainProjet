@@ -1,0 +1,36 @@
+<container>
+
+<h1>Bienvenue sur notre Chatbox</h1>
+<hr></hr>
+
+<div class="row-fluid">
+	<div class="col-xs-2">
+		<div class="table-responsive">
+			<table class="tprenom" style="display: inline-block">
+				<tr>
+					<th class="ths">PERSONNES</th>
+				</tr>
+				<tr ng-repeat="user in users">
+					<td ng-click="changeUser(user.id)" class="resultsper">{{user.prenom}}
+						{{user.nom}}</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+
+	<div class="col-xs-10">
+		<div>
+			<table class="tableDaMe" style="float: left">
+				<tr>
+					<th class="ths">DATES</th>
+					<th class="ths">MESSAGES</th>
+				</tr>
+				<tr ng-repeat="message in messages">
+					<td class="results">{{timeConverter(message.timeStamp)}}</td>
+					<td class="expe_{{message.expediteur}}">{{message.contenu}}</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</div>
+</container>
