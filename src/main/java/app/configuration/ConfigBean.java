@@ -6,8 +6,8 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 
 import com.mongodb.Mongo;
 
-import app.gestion.GestionMessages;
-import app.gestion.GestionUser;
+import app.gestion.ManageBallot;
+import app.gestion.ManagePollingPlace;
 
 /** Config des beans */
 @Configuration
@@ -16,17 +16,17 @@ public class ConfigBean {
 	/** MongoTemplate a déclarer pour les tests */
 	@Bean
 	public MongoTemplate mongoTemplate(){
-		return new MongoTemplate(new Mongo(), "chatbot");
+		return new MongoTemplate(new Mongo(), "blockchain");
 	}
 
 	@Bean
-	public GestionUser gestionUser() {
-		return new GestionUser();
+	public ManagePollingPlace gestionUser() {
+		return new ManagePollingPlace();
 	}
 	
 	@Bean
-	public GestionMessages gestionMessages() {
-		return new GestionMessages();
+	public ManageBallot gestionMessages() {
+		return new ManageBallot();
 	}
 
 }

@@ -1,7 +1,6 @@
-var myApp = angular.module('CHATBOT', ['Chat', 'ngResource']);
+var myApp = angular.module('blockVote', ['vote', 'ngResource']);
 var my = '.'
 
-// TODO page de recherche 
 /** Configuration des routes de l'application*/
 myApp.config(function ($routeProvider, $httpProvider) {
 
@@ -9,9 +8,15 @@ myApp.config(function ($routeProvider, $httpProvider) {
     // $httpProvider.responseInterceptors.push('IntercepteurHTTP');
 
     /** Accueil */
-    $routeProvider.when('/', {
-        templateUrl: my + '/partials/chat.html',
-        controller: 'afficherChat',
+    $routeProvider.when('/createBallot', {
+        templateUrl: my + '/partials/addBallot.html',
+        controller: 'addBallot',
+        pageKey: 'HOME'
+
+    /** Sinon */
+    }).when('/createPollingPlace', {
+        templateUrl: my + '/partials/addPollingPlace.html',
+        controller: 'addPollingPlace',
         pageKey: 'HOME'
 
     /** Sinon */
@@ -22,6 +27,6 @@ myApp.config(function ($routeProvider, $httpProvider) {
 
 
 /** Controller. */
-myApp.controller('ChatCtrl', function ($route, $scope, $rootScope, $location) {
-
+myApp.controller('VoteCtrl', function ($route, $scope, $rootScope, $location) {
+    console.log("VoteCtrl")
 })

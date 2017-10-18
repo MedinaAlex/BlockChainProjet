@@ -3,8 +3,8 @@ package app;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.springframework.stereotype.Component;
 
-import app.adaptateur.AdaptateurMessage;
-import app.adaptateur.AdaptateurUser;
+import app.adaptateur.AdaptateurBallot;
+import app.adaptateur.AdaptateurPollingPlace;
 
 /**
  * Classe ajoutant les services Rest à la config Jersey
@@ -15,8 +15,8 @@ import app.adaptateur.AdaptateurUser;
 public class JerseyConfig extends ResourceConfig {
 
     public JerseyConfig() {
-        register(AdaptateurUser.class);
-        register(AdaptateurMessage.class);
+        register(AdaptateurPollingPlace.class);
+        register(AdaptateurBallot.class);
     }
 
 }

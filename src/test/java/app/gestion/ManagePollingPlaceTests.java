@@ -9,19 +9,19 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
-import app.bean.Electeur;
+import app.bean.Elector;
 import app.configuration.ConfigBean;
 
 @SpringBootTest
 @RunWith(SpringJUnit4ClassRunner.class)
 //ApplicationContext will be loaded from the OrderServiceConfig class
 @ContextConfiguration(classes=ConfigBean.class, loader=AnnotationConfigContextLoader.class)
-public class GestionUserTests {
+public class ManagePollingPlaceTests {
 	
 	@Autowired
-	GestionUser gestionUser;
+	ManagePollingPlace gestionUser;
 	
-	private static Logger LOG = Logger.getLogger(GestionUserTests.class);
+	private static Logger LOG = Logger.getLogger(ManagePollingPlaceTests.class);
 	
 //	@Test
 //	public void test() {

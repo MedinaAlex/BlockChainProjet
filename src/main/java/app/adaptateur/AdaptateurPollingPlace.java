@@ -17,8 +17,9 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import app.bean.Electeur;
-import app.gestion.GestionUser;
+import app.bean.Ballot;
+import app.bean.PollingPlace;
+import app.gestion.ManagePollingPlace;
 
 
 /**
@@ -28,24 +29,30 @@ import app.gestion.GestionUser;
  *
  */
 @Component
-@Path("/users")
+@Path("/pollingplace")
 @Produces(MediaType.APPLICATION_JSON)
-public class AdaptateurUser {
+public class AdaptateurPollingPlace {
 	
 	/** LOG de l'application */
-	private static Logger LOG = Logger.getLogger(AdaptateurUser.class);
+	private static Logger LOG = Logger.getLogger(AdaptateurPollingPlace.class);
 	
 	/** DAO des users */
 	@Autowired
-	GestionUser gestionUser;
+	ManagePollingPlace managePollingPlace;
 		
 	/**
 	 * récupère la liste de tous les users
 	 * @return la liste des users
 	 */
 	@GET
-	public List<Electeur> getUsers() {
-		return gestionUser.getList();
+	public List<PollingPlace> getUsers() {
+		return managePollingPlace.getList();
+	}
+	
+	@GET
+	@Path("empty")
+	public PollingPlace getEmptyPollingPlace() {
+		return new PollingPlace();
 	}
 	
 	/**
@@ -55,8 +62,8 @@ public class AdaptateurUser {
 	 */
 	@GET
 	@Path("/{id}")
-	public Electeur getUser(@PathParam("id") String idUser) {
-		return gestionUser.getById(idUser);
+	public PollingPlace getUser(@PathParam("id") String idUser) {
+		return managePollingPlace.getById(idUser);
 	}
 	
 	/**
@@ -67,21 +74,11 @@ public class AdaptateurUser {
 	 * @return Une Response OK avec un message si
 	 */
 	@POST
-	@Path("/add")
-	public Response addUser(@FormParam("id") String id, @FormParam("prenom") String prenom, @FormParam("nom") String nom) {
-		Response resp;
-		if (gestionUser.getById(id) == null ) {
-			Electeur user = new Electeur(id, nom, prenom);
-			LOG.info("add user " + user);
-			
-			gestionUser.add(user);
-			resp = Response.ok("User ajouté", MediaType.APPLICATION_JSON).build();
-		}else {
-			LOG.info("User déjà existant");
-			resp = Response.ok("User déjà existant", MediaType.APPLICATION_JSON).build();
-		}
+	@Path("/{pollingPlace}")
+	public Response addUser(@PathParam("pollingPlace") PollingPlace pollingPlace) {
+		managePollingPlace.add(pollingPlace);
 		
-		return resp;
+		return Response.ok("PollingPlace added", MediaType.APPLICATION_JSON).build();
 	}
 	
 	/**
@@ -91,13 +88,14 @@ public class AdaptateurUser {
 	@GET
 	@Path("/generateDB")
 	public Response generateDB() {
-		gestionUser.add(new Electeur("1234", "Alex", "Medina"));
-		gestionUser.add(new Electeur(null, "Amandine", "Medina"));
-		gestionUser.add(new Electeur(null, "Adrien", "Medina"));
-		gestionUser.add(new Electeur(null, "Romain", "Medina"));
-		gestionUser.add(new Electeur(null, "Flavien", "Medina"));
+		managePollingPlace.add(new PollingPlace(null,"44","Nantes","145"));
+		managePollingPlace.add(new PollingPlace(null,"44","Nantes","146"));
+		managePollingPlace.add(new PollingPlace(null,"44","Carquefou","14"));
+		managePollingPlace.add(new PollingPlace(null,"44","Carquefou","15"));
+		managePollingPlace.add(new PollingPlace(null,"44","Nantes","115"));
 		
-		return Response.ok("Base générée", MediaType.APPLICATION_JSON).build();
+		
+		return Response.ok("Database PollingPlace generated", MediaType.APPLICATION_JSON).build();
 	}
 
 	/**
@@ -108,7 +106,7 @@ public class AdaptateurUser {
 	@DELETE
 	@Path("/{id}")
 	public Response removeUser(@PathParam("id") String id) {
-		gestionUser.delete(id);
+		managePollingPlace.delete(id);
 		return Response.ok("User supprimé", MediaType.APPLICATION_JSON).build();
 	}
 }
