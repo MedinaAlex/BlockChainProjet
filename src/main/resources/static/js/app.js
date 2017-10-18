@@ -32,5 +32,4 @@ myApp.config(function ($routeProvider, $httpProvider) {
 
 /** Controller. */
 myApp.controller('VoteCtrl', function ($route, $scope, $rootScope, $location) {
-    console.log("VoteCtrl")
 })
