@@ -101,7 +101,7 @@ vote.controller('voteCTRL', function ($scope, $rootScope, $location, pollingPlac
             choice: m_candidate,
             department: m_department,
             city: m_city,
-            pollingPlaceNumber: m_numberPolling
+            pollingPlaceId: m_numberPolling
         }, function(){
             console.log("success")
         })
