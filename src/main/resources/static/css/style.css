@@ -4,29 +4,65 @@ body {
 	font: 1em sans-serif;
 }
 
+.h1 {
+	font-size: 20px;
+	font-family: Arial Black, Arial, sans-serif;
+	color: #809fff;
+}
+
+.button {
+	display: inline-block;
+	padding: 15px 25px;
+	font-size: 24px;
+	cursor: pointer;
+	text-align: center;
+	text-decoration: none;
+	outline: none;
+	color: #fff;
+	background-color: #4CAF50;
+	border: none;
+	border-radius: 15px;
+	box-shadow: 0 9px #999;
+	font-family: Arial Black, Arial, sans-serif;
+}
+
+.button:hover {
+	background-color: #3e8e41
+}
+
+.button:active {
+	background-color: #3e8e41;
+	box-shadow: 0 5px #666;
+	transform: translateY(4px);
+}
+
 form {
-  display: inline-block;
-  padding: 0;
-  margin : 0;
+	display: inline-block;
+	padding: 0;
+	margin: 0;
+}
+
+.input {
+	font-family: Impact, Comic Sans MS, Arial, Verdana, sans-serif;
 }
 
 fieldset {
-  border : 1px solid #CCC;
-  border-radius: 5px;
-  margin : 0;
-  padding: 1em;
+	border: 1px solid #CCC;
+	border-radius: 5px;
+	margin: 0;
+	padding: 1em;
 }
 
 label {
-  cursor : pointer;
+	cursor: pointer;
 }
 
 p {
-  margin : 0;
+	margin: 0;
 }
 
 p+p {
-  margin : .5em 0 0;
+	margin: .5em 0 0;
 }
 
 footer {
