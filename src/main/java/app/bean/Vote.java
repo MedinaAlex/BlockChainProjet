@@ -135,6 +135,12 @@ public class Vote{
 		this.pollingPlaceId = pollingPlaceId;
 	}
 
+        /**
+         * Returns a {@code String} object representing the
+         * specified integer.
+         * 
+         * @return a string representation of the object.
+         */
         @Override
         public String toString() {
             return "Vote{" + "ballotId=" + ballotId + ", choice=" + choice + ", department=" + department + ", city=" + city + ", pollingPlaceId=" + pollingPlaceId + '}';

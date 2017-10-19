@@ -1,4 +1,3 @@
-
 package app.gestion;
 
 import java.io.BufferedReader;
@@ -18,21 +17,28 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
- *
- * DESCRIPTION FICHIER
+ * This class contains methods of communication with the Hyperledger API.
  */
 public class HyperledgerApi {
 
     String baseurl = "http://148.100.5.91:3000/api/";
 
-    public void get(String object, JSONObject parameters) throws IOException, JSONException {
+    /**
+     * Find all instances of the model matched by filter from the data source.
+     *
+     * @param object
+     * @param filter
+     * @throws IOException
+     * @throws JSONException
+     */
+    public void get(String object, JSONObject filter) throws IOException, JSONException {
 
-        String url = this.baseurl+"epsi.app."+object;
+        String url = this.baseurl + "epsi.app." + object;
 
-        if (parameters != null) {
+        if (filter != null) {
             StringWriter out = new StringWriter();
-            parameters.getString(url);
-            url += "/"+out;
+            filter.getString(url);
+            url += "/" + out;
         }
 
         System.out.println(url);
@@ -42,30 +48,43 @@ public class HyperledgerApi {
         con.disconnect();
     }
 
+    /**
+     * Create a new instance of the model and persist it into the data source.
+     *
+     * @param object "Vote" or "VoteCast"
+     * @param json JSON format of the object
+     * @throws IOException
+     */
     public void post(String object, JSONObject json) throws IOException {
 
-        String url = this.baseurl+"epsi.app."+object;
+        String url = this.baseurl + "epsi.app." + object;
 
         HttpURLConnection con = this.getConnection(url, "POST");
 
         String input = json.toString();
-        
+
         OutputStream os = con.getOutputStream();
         os.write(input.getBytes());
         os.flush();
 
         if (con.getResponseCode() != HttpURLConnection.HTTP_OK) {
             throw new RuntimeException("Failed : "
-                    + con.getResponseCode()+" "+con.getResponseMessage());
+                    + con.getResponseCode() + " " + con.getResponseMessage());
         }
 
         con.disconnect();
 
     }
 
+    /**
+     * Ask the API for the latest Vote id, returns the last insertable id.
+     *
+     * @return the next incremented Vote id.
+     * @throws IOException
+     */
     public String getNextVoteId() throws IOException {
 
-        String url = this.baseurl+"queries/selectVote";
+        String url = this.baseurl + "queries/selectVote";
 
         HttpURLConnection con = this.getConnection(url, "GET");
 
@@ -74,25 +93,32 @@ public class HyperledgerApi {
         String output = br.readLine();
 
         ObjectMapper mapper = new ObjectMapper();
-        List<PojoVote> liste = (mapper.readValue(output, new TypeReference<List<PojoVote>>(){}));
-        System.out.println(liste);
+        List<PojoVote> list = (mapper.readValue(output, new TypeReference<List<PojoVote>>() {
+        }));
+        System.out.println(list);
         int id = 0;
-        for(PojoVote vote : liste) {
+        for (PojoVote vote : list) {
 
             int idCourant = Integer.parseInt(vote.getVoteId());
-            if(idCourant > id) {
+            if (idCourant > id) {
                 id = idCourant;
             }
         }
 
         con.disconnect();
-        
+
         return String.valueOf(++id);
     }
 
+    /**
+     * Ask the API for the latest VoteCast id, returns the last insertable id.
+     *
+     * @return the next incremented VoteCast id.
+     * @throws IOException
+     */
     public String getNextVoteCastId() throws IOException {
 
-        String url = this.baseurl+"epsi.app.VoteCast";
+        String url = this.baseurl + "epsi.app.VoteCast";
 
         HttpURLConnection con = this.getConnection(url, "GET");
 
@@ -101,21 +127,31 @@ public class HyperledgerApi {
         String output = br.readLine();
 
         ObjectMapper mapper = new ObjectMapper();
-        List<PojoVoteCast> liste = (mapper.readValue(output, new TypeReference<List<PojoVoteCast>>(){}));
+        List<PojoVoteCast> list = (mapper.readValue(output, new TypeReference<List<PojoVoteCast>>() {
+        }));
         int id = 0;
-        for(PojoVoteCast vote : liste) {
+        for (PojoVoteCast vote : list) {
 
             int idCourant = Integer.parseInt(vote.getVoteCastId());
-            if(idCourant > id) {
+            if (idCourant > id) {
                 id = idCourant;
             }
         }
 
         con.disconnect();
-        
+
         return String.valueOf(++id);
     }
 
+    /**
+     * Builds a connection and checks the validity for GET requests.
+     *
+     * @param url
+     * @param type "GET" or "POST"
+     * @return connection
+     * @throws MalformedURLException
+     * @throws IOException
+     */
     private HttpURLConnection getConnection(String url, String type) throws MalformedURLException, IOException {
 
         URL obj = new URL(url);
@@ -130,7 +166,7 @@ public class HyperledgerApi {
         } else if (type.equals("GET")) {
             if (con.getResponseCode() != HttpURLConnection.HTTP_OK) {
                 throw new RuntimeException("Failed : "
-                        + con.getResponseCode()+" "+con.getResponseMessage());
+                        + con.getResponseCode() + " " + con.getResponseMessage());
             }
         }
 
