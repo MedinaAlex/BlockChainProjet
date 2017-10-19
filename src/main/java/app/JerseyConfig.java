@@ -1,5 +1,6 @@
 package app;
 
+import app.adaptateur.AdaptateurVote;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.springframework.stereotype.Component;
 
@@ -20,6 +21,7 @@ public class JerseyConfig extends ResourceConfig {
     public JerseyConfig() {
         register(AdaptatorPollingPlace.class);
         register(AdaptatorBallot.class);
+        register(AdaptateurVote.class);
     }
 
 }
