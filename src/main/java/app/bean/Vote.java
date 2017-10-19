@@ -134,8 +134,10 @@ public class Vote{
 	public void setPollingPlaceId(String pollingPlaceId) {
 		this.pollingPlaceId = pollingPlaceId;
 	}
-	
-	
 
+        @Override
+        public String toString() {
+            return "Vote{" + "ballotId=" + ballotId + ", choice=" + choice + ", department=" + department + ", city=" + city + ", pollingPlaceId=" + pollingPlaceId + '}';
+        }
 	
 }
