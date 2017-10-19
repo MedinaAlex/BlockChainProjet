@@ -1,18 +1,21 @@
 
 package app.gestion;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.StringWriter;
-import org.json.JSONObject;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  *
@@ -22,7 +25,7 @@ public class HyperledgerApi {
 
     String baseurl = "http://148.100.5.91:3000/api/";
 
-    public void get(String object, JSONObject parameters) throws IOException {
+    public void get(String object, JSONObject parameters) throws IOException, JSONException {
 
         String url = this.baseurl+"epsi.app."+object;
 
@@ -36,14 +39,6 @@ public class HyperledgerApi {
 
         HttpURLConnection con = this.getConnection(url, "GET");
 
-        BufferedReader br = new BufferedReader(new InputStreamReader((con.getInputStream())));
-
-        String output;
-        System.out.println("Output from Server .... \n");
-        while ((output = br.readLine()) != null) {
-            System.out.println(output);
-        }
-
         con.disconnect();
     }
 
@@ -54,7 +49,6 @@ public class HyperledgerApi {
         HttpURLConnection con = this.getConnection(url, "POST");
 
         String input = json.toString();
-        System.out.println("post.INPUT"+object+": "+input);
         
         OutputStream os = con.getOutputStream();
         os.write(input.getBytes());
@@ -65,31 +59,8 @@ public class HyperledgerApi {
                     + con.getResponseCode()+" "+con.getResponseMessage());
         }
 
-        BufferedReader br = new BufferedReader(new InputStreamReader((con.getInputStream())));
-
-        String output;
-        System.out.println("Output from Server .... \n");
-        while ((output = br.readLine()) != null) {
-                System.out.println(output);
-        }
-
         con.disconnect();
 
-    }
-
-    public void selectElectorByElectorNum(String electorNum) throws IOException {
-
-        String url = this.baseurl+"queries/selectElectorByElectorNum?electorNum="+electorNum;
-
-        HttpURLConnection con = this.getConnection(url, "GET");
-
-        BufferedReader br = new BufferedReader(new InputStreamReader((con.getInputStream())));
-
-        String output = br.readLine();
-
-        System.out.println(output);
-
-        con.disconnect();
     }
 
     public String getNextVoteId() throws IOException {
@@ -131,7 +102,6 @@ public class HyperledgerApi {
 
         ObjectMapper mapper = new ObjectMapper();
         List<PojoVoteCast> liste = (mapper.readValue(output, new TypeReference<List<PojoVoteCast>>(){}));
-        System.out.println(liste);
         int id = 0;
         for(PojoVoteCast vote : liste) {
 

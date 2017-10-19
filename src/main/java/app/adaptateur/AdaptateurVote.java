@@ -10,6 +10,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.stereotype.Component;
 
@@ -29,9 +31,10 @@ public class AdaptateurVote {
      * @param vote the ballot to add
      * @return an Ok Response with message
      * @throws java.io.IOException
+     * @throws JSONException 
      */
     @POST
-    public Response addVote(Vote vote) throws IOException {
+    public Response addVote(Vote vote) throws IOException, JSONException {
 
         System.out.println("addVote.VOTE: "+vote);
         JSONObject jsonVote = new JSONObject();
@@ -42,7 +45,6 @@ public class AdaptateurVote {
         jsonVote.put("pollingPlaceId", vote.getPollingPlaceId());
         String voteId = api.getNextVoteId();
         jsonVote.put("voteId", voteId);
-        System.out.println("addVote.VOTE: "+jsonVote);
 
         JSONObject jsonVoteCast = new JSONObject();
         Random rand = new Random();
@@ -52,7 +54,6 @@ public class AdaptateurVote {
         jsonVoteCast.put("lastName", "lastname");
         jsonVoteCast.put("ballotId", vote.getBallotId());
         jsonVoteCast.put("pollingPlaceId", vote.getPollingPlaceId());
-        System.out.println("addVote.VOTECAST: "+jsonVoteCast);
 
         api.post("Vote", jsonVote);
         api.post("VoteCast", jsonVoteCast);
