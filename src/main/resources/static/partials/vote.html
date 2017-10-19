@@ -1,25 +1,34 @@
-<container>
-    
-    <br>
-    <h3>Choose your polling place</h3>
+<container> <br>
+<h3>Choose your polling place</h3>
 
-    <label for="pollingPlace"> Polling place: </label>
-    <select name="pollingPlace" id="pollingPlace" >
-      <option ng-repeat="polling in pollingplaces" value="{{polling}}">{{polling.department}}/{{polling.city}}/{{polling.pollingPlaceNumber}}</option>
-    </select>
-    
-    <h3>Choose your ballot</h3>
+<p>
+	<label for="pollingPlace"> Polling place: </label> <select
+		name="pollingPlace" id="pollingPlace">
+		<option ng-repeat="polling in pollingplaces" value="{{polling}}">{{polling.department}}/{{polling.city}}/{{polling.pollingPlaceNumber}}</option>
+	</select>
+</p>
+<br>
+<h3>Choose your ballot</h3>
 
-    <label for="ballot"> ballot: </label>
-    <select name="ballot" id="ballot">
-      <option ng-repeat="ballot in ballots" value="{{ballot}}">{{ballot.type}}</option>
-    </select>
-    
-    <label for="candidates"> candidates: </label>
-    <select name="candidate" id="candidate" >
-      <option ng-repeat="candidate in candidates" value="{{candidate}}">{{candidate}}</option>
-    </select>
-    <button ng-click="saveVote()" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-save"></span>&nbsp;Enregistrer</button>
-    <br><br>
-    <a href="#"><button class="btn btn-primary btn-sm">Return</button></a>
+<p>
+	<label for="ballot"> Ballot :</label> <select name="ballot" id="ballot">
+		<option ng-repeat="ballot in ballots" value="{{ballot}}">{{ballot.type}}</option>
+</p>
+<br>
+<p>
+	</select> <label for="candidates"> Candidates : </label> <select
+		name="candidate" id="candidate">
+		<option ng-repeat="candidate in candidates" value="{{candidate}}">{{candidate}}</option>
+	</select>
+</p>
+<br>
+<br>
+<p>
+	<button ng-click="saveVote()" class="btn btn-primary btn-sm">
+		<span class="glyphicon glyphicon-save"></span>&nbsp;Save
+	</button>
+	<a href="#"><button class="btn btn-primary btn-sm">
+			<span class="glyphicon glyphicon-homeReturn"></span>Return
+		</button></a>
+</p>
 </container>

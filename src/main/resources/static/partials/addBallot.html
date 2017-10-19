@@ -3,28 +3,40 @@
 <h1>Elections</h1>
 <hr></hr>
 
-<form id="formElection" method="post"> 
+<form id="formElection" method="post">
 
-<fieldset>
-  <legend>Veuillez sélectionner le type d'élection :</legend>
-  <div>
-    <input type="radio" id="presidentielle" value="Presidentielle" name="typeE">
-    <label for="national">Présidentielle</label>
-  </div>
-  <div>
-    <input type="radio" id="municipal" value="Municipale" name="typeE">
-    <label for="municipal">Municipale</label>
-  </div>
-</fieldset>
+	<fieldset>
+		<legend>Please select the type of election :</legend>
+		<div>
+			<input type="radio" id="presidentielle" value="Presidentielle"
+				name="typeE"> <label for="national">Presidential</label>
+		</div>
+		<div>
+			<input type="radio" id="municipal" value="Municipale" name="typeE">
+			<label for="municipal">Municipal</label>
+		</div>
+	</fieldset>
 
-<br><br>
-<p>Date : <input type="text" id="datepicker"></p>
-<input id="candidates" type="text" size="60" value="Candidats" />
-<input id="infos" type="text" size="60" value="Informations sur l'élection" />
-<button ng-click="saveBallot()" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-save"></span>&nbsp;Enregistrer</button>
+	<br> <br>
+	<p>
+		Date : <input type="text" id="datepicker">
+	</p>
+	<p>
+		<input id="candidates" type="text" size="60" value=" Candidates" />
+	</p>
+	<p>
+		<input id="infos" type="text" size="60"
+			value=" Informations about election" />
+	</p>
+	<br>
+	<p>
+		<button ng-click="saveBallot()" class="btn btn-primary btn-sm">
+			<span class="glyphicon glyphicon-save"></span>&nbsp;Save
+		</button>
+		<a href="#/admin"><button class="btn btn-primary btn-sm">
+				<span class="glyphicon glyphicon-homeReturn"></span>Return
+			</button></a>
+	</p>
 </form>
-<br><br>
-<a href="#"><button class="btn btn-primary btn-sm">Return</button></a> 
-
 </container>
 
