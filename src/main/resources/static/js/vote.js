@@ -1,11 +1,13 @@
+/** Angular module */
 var vote = angular.module('vote', ['blockVote', 'ngResource']);
 
-/* Controllers des bases*/
+/** ballot Controller*/
 vote.controller('addBallot', function ($scope, $rootScope, $location, ballotFactory) {
-    $scope.ballot = ballotFactory.getEmpty({});
 
+    /** add a datepicker */
     $("#datepicker").datepicker();
 
+    /** Function to save a ballot */
     $scope.saveBallot = function(){
         var m_candidates = document.getElementById("candidates").value
         m_candidates = m_candidates.split(", ")
@@ -33,11 +35,10 @@ vote.controller('addBallot', function ($scope, $rootScope, $location, ballotFact
 
 })
 
-/* Controllers des bases*/
+/* Polling Place Controller*/
 vote.controller('addPollingPlace', function ($scope, $rootScope, $location, pollingPlaceFactory) {
-  
-    $scope.pollingPlace = pollingPlaceFactory.getEmpty({});
 
+    /** Function to save a polling place */
     $scope.savePollingPlace = function(){
         var m_department = document.getElementById("department").value
         var m_city = document.getElementById("city").value
@@ -53,7 +54,7 @@ vote.controller('addPollingPlace', function ($scope, $rootScope, $location, poll
     }
 })
 
-/* Factories */
+/* polling place Factory */
 vote.factory('pollingPlaceFactory', function ($resource) {
     return $resource('./rest/pollingplace/:methodeRest/:id', {
         methodeRest: '@methodeRest',
@@ -66,12 +67,6 @@ vote.factory('pollingPlaceFactory', function ($resource) {
             isArray: true,
         },
 
-        getEmpty:
-        {
-            method: 'GET',
-            params: { methodeRest: "empty"}
-        },
-
         addPollingPlace:
         {
             method: 'POST',
@@ -81,6 +76,7 @@ vote.factory('pollingPlaceFactory', function ($resource) {
     })
 })
 
+/* ballot factory */
 vote.factory('ballotFactory', function ($resource) {
     return $resource('./rest/ballot/:methodeRest/:id', {
         methodeRest: '@methodeRest',
@@ -91,12 +87,6 @@ vote.factory('ballotFactory', function ($resource) {
             method: 'GET',
             params: {},
             isArray: true,
-        },
-
-        getEmpty:
-        {
-            method: 'GET',
-            params: { methodeRest: "empty"}
         },
 
         addBallot:

@@ -1,13 +1,12 @@
+
+/** App module */
 var myApp = angular.module('blockVote', ['vote', 'ngResource']);
 var my = '.'
 
-/** Configuration des routes de l'application*/
+/** route configuration */
 myApp.config(function ($routeProvider, $httpProvider) {
 
-    // Ajout de l'intercepteur HTTP
-    // $httpProvider.responseInterceptors.push('IntercepteurHTTP');
-
-    /** Accueil */
+    /** Home */
     $routeProvider.when('/', {
         templateUrl: my + '/partials/choixVote.html',
         controller: '',
@@ -23,7 +22,6 @@ myApp.config(function ($routeProvider, $httpProvider) {
         controller: 'addPollingPlace',
         pageKey: 'HOME'
 
-    /** Sinon */
     }).otherwise({
         redirectTo: '/'
     });

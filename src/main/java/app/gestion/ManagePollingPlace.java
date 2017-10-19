@@ -9,39 +9,39 @@ import org.springframework.stereotype.Service;
 import app.bean.PollingPlace;
 
 /**
- * DAO
+ * Polling place's DAO
  * @author alexm
  *
  */
 @Service
 public class ManagePollingPlace {
 	
-	/** Connection à la base mongo */
+	/** Mongo connection */
 	@Autowired
 	MongoTemplate mongoTemplate;
 
     /**
-     * Récupérer un User donné par son id
-     * @param idUser id de l'User
-     * @return le User
+     * Get a polling place by its Id
+     * @param id polling place Id
+     * @return the polling place
      */
-    public PollingPlace getById(final String idUser) {
-        return mongoTemplate.findById(idUser, PollingPlace.class);
+    public PollingPlace getById(final String id) {
+        return mongoTemplate.findById(id, PollingPlace.class);
 
     }
 
     /**
-     * Récupérer la liste des User
-     * @return la liste des Users
+     * get polling place list
+     * @return polling place list
      */
     public List<PollingPlace> getList() {
         return mongoTemplate.findAll(PollingPlace.class);
     }
 
     /**
-     * Crée un nouvel Use
-     * @param pollingPlace l'User à ajouter (sans l'id)
-     * @return PollingPlace effectivement ajouté (avec id)
+     * add a new polling place to the database
+     * @param pollingPlace the new polling place to add)
+     * @return PollingPlace with generated Id
      */
     public PollingPlace add(final PollingPlace pollingPlace) {
         mongoTemplate.insert(pollingPlace);
@@ -50,8 +50,8 @@ public class ManagePollingPlace {
     }
 
     /**
-     * met à jour un User
-     * @param pollingPlace User à modifier (avec id)
+     * update a polling place
+     * @param pollingPlace to update
      */
     public void update(final PollingPlace pollingPlace) {
 
@@ -59,8 +59,8 @@ public class ManagePollingPlace {
     }
 
     /**
-     * Supprime un User donné par son id
-     * @param id pollingPlace
+     * Remove a polling place from the database
+     * @param id pollingPlace Id
      */
     public void delete(final String id) {
 

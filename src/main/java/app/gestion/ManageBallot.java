@@ -9,38 +9,38 @@ import org.springframework.stereotype.Service;
 import app.bean.Ballot;
 
 /**
- * DAO des messages
+ * Ballot's DAO
  * @author alexm
  *
  */
 @Service
 public class ManageBallot {
 	
-	/** Connection à la base Mongo */
+	/** Mongo connection */
 	@Autowired
 	MongoTemplate mongoTemplate;
 		
 	/**
-     * Récupère un Message de la base mongo à partir de son id.
-     * @param id
-     * @return le message correspondant
+     * Get a ballot by its Id
+     * @param id ballot id
+     * @return the ballot
      */
     public Ballot get(final String id) {
     	return mongoTemplate.findById(id, Ballot.class);
     }
 
     /**
-     * Récupérer la liste des Users
-     * @return l'User actuellement connecté
+     * get ballot list
+     * @return ballot list
      */
     public List<Ballot> getList() {
         return mongoTemplate.findAll(Ballot.class);
     }
 
     /**
-     * Crée un nouvel User
-     * @param user l'User à ajouter (sans l'id)
-     * @return l'User effectivement ajouté (avec id)
+     * insert a new Ballot
+     * @param ballot the new ballot
+     * @return the new ballot with a generated id
      */
     public Ballot add(final Ballot ballot) {
 
@@ -49,17 +49,17 @@ public class ManageBallot {
     }
 
     /**
-     * met à jour un Message
-     * @param message Message à modifier (avec id)
+     * update a ballot
+     * @param ballot ballot to update
      */
-    public void update(final Ballot message) {
+    public void update(final Ballot ballot) {
 
-        mongoTemplate.save(message);
+        mongoTemplate.save(ballot);
     }
 
     /**
-     * Supprime un Message donné par son id
-     * @param id du message
+     * Remove a ballot
+     * @param id ballot's Id
      */
     public void delete(final String id) {
 
