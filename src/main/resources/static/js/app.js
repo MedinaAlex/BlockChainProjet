@@ -8,8 +8,19 @@ myApp.config(function ($routeProvider, $httpProvider) {
 
     /** Home */
     $routeProvider.when('/', {
-        templateUrl: my + '/partials/choixVote.html',
+        templateUrl: my + '/partials/home.html',
         controller: '',
+        pageKey: 'HOME'
+
+    }).when('/admin', {
+        templateUrl: my + '/partials/admin.html',
+        controller: '',
+        pageKey: 'HOME'
+
+    })
+    .when('/vote', {
+        templateUrl: my + '/partials/vote.html',
+        controller: 'voteCTRL',
         pageKey: 'HOME'
 
     }).when('/createBallot', {
