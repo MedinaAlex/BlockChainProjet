@@ -96,13 +96,6 @@ vote.controller('voteCTRL', function ($scope, $rootScope, $location, pollingPlac
         var y3 = document.getElementById("candidate").options;
         var m_candidate = y3[x3].value
 
-        console.log(m_ballotId)
-        console.log(m_candidate)
-        console.log(m_department)
-        console.log(m_city)
-        console.log(m_numberPolling)
-
-
         voteFactory.addVote({
             ballotId: m_ballotId,
             choice: m_candidate,
