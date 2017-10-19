@@ -30,6 +30,7 @@ vote.controller('addBallot', function ($scope, $rootScope, $location, ballotFact
             date: m_date
         }, function(){
             console.log("success")
+            document.getElementById("success").innerHTML  = "ballot added"
         })
     }
 
@@ -50,6 +51,7 @@ vote.controller('addPollingPlace', function ($scope, $rootScope, $location, poll
             pollingPlaceNumber: m_numberPolling
         }, function(){
             console.log("success")
+            document.getElementById("success").innerHTML  = "Polling place added"
         })
     }
 })
@@ -104,6 +106,7 @@ vote.controller('voteCTRL', function ($scope, $rootScope, $location, pollingPlac
             pollingPlaceId: m_numberPolling
         }, function(){
             console.log("success")
+            document.getElementById("success").innerHTML  = "Vote added"
         })
     }
 })
