@@ -54,6 +54,67 @@ vote.controller('addPollingPlace', function ($scope, $rootScope, $location, poll
     }
 })
 
+/* Polling Place Controller*/
+vote.controller('voteCTRL', function ($scope, $rootScope, $location, pollingPlaceFactory, ballotFactory, voteFactory) {
+
+    pollingPlaceFactory.getList({}, function(pollingplaces){
+        $scope.pollingplaces = pollingplaces;
+    })
+
+
+    ballotFactory.getList({}, function(ballots){
+        $scope.ballots = ballots
+        $scope.candidates = ballots[0].candidates
+    })
+
+    $(document).on('change','#ballot',function(){
+        console.log("test")
+        var x = document.getElementById("ballot").selectedIndex;
+        var y = document.getElementById("ballot").options;
+        var ballot = y[x].value
+        
+        ballot = JSON.parse(ballot);
+        $scope.candidates = ballot.candidates
+        $scope.$apply()
+    });
+
+    /** Function to save a polling place */
+    $scope.saveVote = function(){
+        var x = document.getElementById("pollingPlace").selectedIndex;
+        var y = document.getElementById("pollingPlace").options;
+        var m_polling = JSON.parse(y[x].value)
+        var m_department = m_polling.department
+        var m_city = m_polling.city
+        var m_numberPolling = m_polling.pollingPlaceNumber
+
+        var x2 = document.getElementById("ballot").selectedIndex;
+        var y2 = document.getElementById("ballot").options;
+        var m_ballot = JSON.parse(y2[x2].value)
+        var m_ballotId = m_ballot.id
+
+        var x3 = document.getElementById("candidate").selectedIndex;
+        var y3 = document.getElementById("candidate").options;
+        var m_candidate = y3[x3].value
+
+        console.log(m_ballotId)
+        console.log(m_candidate)
+        console.log(m_department)
+        console.log(m_city)
+        console.log(m_numberPolling)
+
+
+        voteFactory.addVote({
+            ballotId: m_ballotId,
+            choice: m_candidate,
+            department: m_department,
+            city: m_city,
+            pollingPlaceNumber: m_numberPolling
+        }, function(){
+            console.log("success")
+        })
+    }
+})
+
 /* polling place Factory */
 vote.factory('pollingPlaceFactory', function ($resource) {
     return $resource('./rest/pollingplace/:methodeRest/:id', {
@@ -92,7 +153,29 @@ vote.factory('ballotFactory', function ($resource) {
         addBallot:
         {
             method: 'POST',
-            params: { ballot: {"infos": '@m_infos', "type": '@m_type', "candidates": '@m_candidates', "date":'@date' }}
+            params: { ballot: {"infos": '@infos', "type": '@type', "candidates": '@candidates', "date":'@date' }}
+        },
+    })
+})
+
+
+/* ballot factory */
+vote.factory('voteFactory', function ($resource) {
+    return $resource('./rest/vote/:methodeRest/:id', {
+        methodeRest: '@methodeRest',
+        id: '@id'
+    }, {
+        getList:
+        {
+            method: 'GET',
+            params: {},
+            isArray: true,
+        },
+
+        addVote:
+        {
+            method: 'POST',
+            params: { vote: {"ballotId": '@ballotId', "choice": '@choice', "city": '@city', "department": '@department', "pollingPlaceId": '@pollingPlaceId' }}
         },
     })
 })
