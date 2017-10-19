@@ -36,8 +36,7 @@ public class HyperledgerApi {
 
         HttpURLConnection con = this.getConnection(url, "GET");
 
-        BufferedReader br = new BufferedReader(new InputStreamReader(
-                        (con.getInputStream())));
+        BufferedReader br = new BufferedReader(new InputStreamReader((con.getInputStream())));
 
         String output;
         System.out.println("Output from Server .... \n");
@@ -55,20 +54,18 @@ public class HyperledgerApi {
         HttpURLConnection con = this.getConnection(url, "POST");
 
         String input = json.toString();
-        System.out.println(input);
+        System.out.println("post.INPUT"+object+": "+input);
         
         OutputStream os = con.getOutputStream();
         os.write(input.getBytes());
         os.flush();
-        System.out.println(url);
-        // Send post request
+
         if (con.getResponseCode() != HttpURLConnection.HTTP_OK) {
             throw new RuntimeException("Failed : "
                     + con.getResponseCode()+" "+con.getResponseMessage());
         }
 
-        BufferedReader br = new BufferedReader(new InputStreamReader(
-				(con.getInputStream())));
+        BufferedReader br = new BufferedReader(new InputStreamReader((con.getInputStream())));
 
         String output;
         System.out.println("Output from Server .... \n");
@@ -84,18 +81,13 @@ public class HyperledgerApi {
 
         String url = this.baseurl+"queries/selectElectorByElectorNum?electorNum="+electorNum;
 
-        System.out.println(url);
-
         HttpURLConnection con = this.getConnection(url, "GET");
 
-        BufferedReader br = new BufferedReader(new InputStreamReader(
-                        (con.getInputStream())));
+        BufferedReader br = new BufferedReader(new InputStreamReader((con.getInputStream())));
 
-        String output;
-        System.out.println("Output from Server .... \n");
-        while ((output = br.readLine()) != null) {
-            System.out.println(output);
-        }
+        String output = br.readLine();
+
+        System.out.println(output);
 
         con.disconnect();
     }
@@ -106,10 +98,8 @@ public class HyperledgerApi {
 
         HttpURLConnection con = this.getConnection(url, "GET");
 
-        BufferedReader br = new BufferedReader(new InputStreamReader(
-                        (con.getInputStream())));
+        BufferedReader br = new BufferedReader(new InputStreamReader((con.getInputStream())));
 
-        System.out.println("Output from Server .... \n");
         String output = br.readLine();
 
         ObjectMapper mapper = new ObjectMapper();
@@ -117,20 +107,46 @@ public class HyperledgerApi {
         System.out.println(liste);
         int id = 0;
         for(PojoVote vote : liste) {
-            
+
             int idCourant = Integer.parseInt(vote.getVoteId());
             if(idCourant > id) {
                 id = idCourant;
             }
         }
-        System.out.println(++id);
 
         con.disconnect();
         
-        return String.valueOf(id);
+        return String.valueOf(++id);
     }
 
-        private HttpURLConnection getConnection(String url, String type) throws MalformedURLException, IOException {
+    public String getNextVoteCastId() throws IOException {
+
+        String url = this.baseurl+"epsi.app.VoteCast";
+
+        HttpURLConnection con = this.getConnection(url, "GET");
+
+        BufferedReader br = new BufferedReader(new InputStreamReader((con.getInputStream())));
+
+        String output = br.readLine();
+
+        ObjectMapper mapper = new ObjectMapper();
+        List<PojoVoteCast> liste = (mapper.readValue(output, new TypeReference<List<PojoVoteCast>>(){}));
+        System.out.println(liste);
+        int id = 0;
+        for(PojoVoteCast vote : liste) {
+
+            int idCourant = Integer.parseInt(vote.getVoteCastId());
+            if(idCourant > id) {
+                id = idCourant;
+            }
+        }
+
+        con.disconnect();
+        
+        return String.valueOf(++id);
+    }
+
+    private HttpURLConnection getConnection(String url, String type) throws MalformedURLException, IOException {
 
         URL obj = new URL(url);
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();

@@ -3,9 +3,8 @@ package app.adaptateur;
 
 import app.bean.Vote;
 import app.gestion.HyperledgerApi;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
-import javax.ws.rs.GET;
+import java.util.Random;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -23,8 +22,8 @@ import org.springframework.stereotype.Component;
 @Produces(MediaType.APPLICATION_JSON)
 public class AdaptateurVote {
 
-    HyperledgerApi api;
-    
+    HyperledgerApi api = new HyperledgerApi();
+
     /**
      * add a vote to the database
      * @param vote the ballot to add
@@ -34,15 +33,31 @@ public class AdaptateurVote {
     @POST
     public Response addVote(Vote vote) throws IOException {
 
-        JSONObject json = new JSONObject();
-        json.put("ballotId", vote.getBallotId());
-        json.put("choice", vote.getChoice());
-        json.put("department", vote.getDepartment());
-        json.put("pollingPlaceId", vote.getPollingPlaceId());
-        json.put("voteId", api.getNextVoteId());
+        System.out.println("addVote.VOTE: "+vote);
+        JSONObject jsonVote = new JSONObject();
+        jsonVote.put("ballotId", vote.getBallotId());
+        jsonVote.put("choice", vote.getChoice());
+        jsonVote.put("department", vote.getDepartment());
+        jsonVote.put("city", vote.getCity());
+        jsonVote.put("pollingPlaceId", vote.getPollingPlaceId());
+        String voteId = api.getNextVoteId();
+        jsonVote.put("voteId", voteId);
+        System.out.println("addVote.VOTE: "+jsonVote);
 
-        api.post("Vote", json);
+        JSONObject jsonVoteCast = new JSONObject();
+        Random rand = new Random();
+        jsonVoteCast.put("voteCastId", api.getNextVoteCastId());
+        jsonVoteCast.put("electorNum", String.valueOf(rand.nextInt(50000) + 1));
+        jsonVoteCast.put("firstName", "firstname");
+        jsonVoteCast.put("lastName", "lastname");
+        jsonVoteCast.put("ballotId", vote.getBallotId());
+        jsonVoteCast.put("pollingPlaceId", vote.getPollingPlaceId());
+        System.out.println("addVote.VOTECAST: "+jsonVoteCast);
+
+        api.post("Vote", jsonVote);
+        api.post("VoteCast", jsonVoteCast);
 
         return Response.ok("added vote", MediaType.APPLICATION_JSON).build();
     }
+    
 }

@@ -9,7 +9,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
-import app.bean.Elector;
+import app.bean.VoteCast;
 import app.configuration.ConfigBean;
 
 @SpringBootTest

@@ -1,23 +1,23 @@
 package app.bean;
 
 /**
- * The Class Elector.
+ * The Class VoteCast.
  */
-public class Elector{
+public class VoteCast{
 
-	/**  Elector's ID. */
+	/**  VoteCast's ID. */
 	private String electorNum;
 	
-	/**  Elector's last name. */
+	/**  VoteCast's last name. */
 	private String lastName;
 	
-	/**  Elector's first name. */
+	/**  VoteCast's first name. */
 	private String firstName;
 	
 	/**
 	 *  Default constructor.
 	 */
-	public Elector() {
+	public VoteCast() {
 		super();
 	}
 	
@@ -26,7 +26,7 @@ public class Elector{
 	 *
 	 * @param id Elector's ID
 	 */
-	public Elector(String id) {
+	public VoteCast(String id) {
 		this.electorNum = id;
 	}
 
@@ -37,7 +37,7 @@ public class Elector{
 	 * @param lastName du user
 	 * @param firstName du user
 	 */
-	public Elector(String id, String lastName, String firstName) {
+	public VoteCast(String id, String lastName, String firstName) {
 		super();
 		this.electorNum = id;
 		this.lastName = lastName;
